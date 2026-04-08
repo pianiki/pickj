@@ -1,0 +1,10 @@
+{
+  "plus": 60000,
+  "minus": 40000,
+  "total": 0,
+  "history": [
+    { "match": "Tim A vs Tim B", "result": "win", "amount": 200000, "host": "Laga aenk" },
+    { "match": "Tim C vs Tim D", "result": "lose", "amount": 150000, "host": "Laga Anto" },
+    { "match": "Tim X vs Tim Y", "result": "otw", "host": "Laga Bopeng" }
+  ]
+}

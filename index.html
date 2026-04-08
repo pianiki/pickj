@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HASILLPIKJ</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Poppins; }
+
+    body {
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: url('bg.jpg') no-repeat center center/cover;
+      color:#f1f5f9;
+      padding:20px;
+      overflow:hidden;
+    }
+
+    .stars {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .stars::before, .stars::after {
+      content:"";
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:white;
+      box-shadow:
+        50px 100px white,
+        120px 200px white,
+        200px 50px white,
+        300px 150px white,
+        400px 80px white,
+        500px 220px white,
+        600px 120px white,
+        700px 300px white;
+      animation: twinkle 3s infinite ease-in-out alternate;
+      opacity:0.5;
+    }
+
+    .stars::after {
+      animation-delay:1.5s;
+      opacity:0.3;
+    }
+
+    @keyframes twinkle {
+      from { opacity:0.2; }
+      to { opacity:0.8; }
+    }
+
+    .overlay {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      backdrop-filter:blur(3px);
+      z-index:-1;
+    }
+
+    .card {
+      width:350px;
+      padding:25px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(25px);
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.2);
+      position:relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+
+    img {
+      width:100px;
+      height:100px;
+      border-radius:20px;
+      border:2px solid rgba(255,255,255,0.5);
+      margin-bottom:10px;
+      object-fit:cover;
+      transition:0.3s;
+    }
+
+    img:hover {
+      transform:scale(1.05);
+      box-shadow:0 0 20px rgba(255,255,255,0.5);
+    }
+
+    h2 { font-size:18px; margin-bottom:10px; }
+
+    .box {
+      margin-top:10px;
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.15);
+      transition:0.25s;
+    }
+
+    .box:hover {
+      background:rgba(255,255,255,0.18);
+      transform:scale(1.02);
+    }
+
+    .label { font-size:11px; opacity:0.7; }
+    .value { font-size:16px; margin-top:4px; }
+
+    .plus { color:#4ade80; font-weight:600; }
+    .minus { color:#f87171; font-weight:600; }
+    .total { color:#e2e8f0; font-weight:600; }
+
+    .history {
+      margin-top:15px;
+      text-align:left;
+    }
+
+    .history-title {
+      font-size:12px;
+      margin-bottom:8px;
+      opacity:0.7;
+      display:flex;
+      justify-content:space-between;
+    }
+
+    .item {
+      padding:10px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.08);
+      margin-bottom:6px;
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.1);
+      transition:0.2s;
+    }
+
+    .item:hover {
+      transform:translateX(3px);
+      background:rgba(255,255,255,0.15);
+    }
+
+    .match {
+      display:flex;
+      flex-direction:column;
+    }
+
+    .status {
+      font-size:10px;
+      opacity:0.7;
+    }
+
+    .win { color:#4ade80; }
+    .lose { color:#f87171; }
+    .otw { color:#facc15; }
+
+  </style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="overlay"></div>
+
+<div class="card">
+  <img src="pp.jpg">
+  <h2>bongless (piann)</h2>
+
+  <div class="box">
+    <div class="label">Saldo + (bersihh)</div>
+    <div class="value plus" id="plus">+ Rp 0</div>
+  </div>
+
+  <div class="box">
+    <div class="label">Saldo - (bersihh)</div>
+    <div class="value minus" id="minus">- Rp 0</div>
+  </div>
+
+  <div class="box">
+    <div class="label">Saldo Sekarang</div>
+    <div class="value total" id="total">Rp 0</div>
+  </div>
+
+  <div class="history">
+    <div class="history-title">
+      History Pik
+    </div>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<script>
+async function load() {
+  let res = await fetch('data.json?' + Date.now());
+  let data = await res.json();
+
+  document.getElementById('plus').innerText =
+    '+ Rp ' + data.plus.toLocaleString('id-ID');
+
+  document.getElementById('minus').innerText =
+    '- Rp ' + data.minus.toLocaleString('id-ID');
+
+  document.getElementById('total').innerText =
+    'Rp ' + (data.total || 0).toLocaleString('id-ID');
+
+  let list = document.getElementById('historyList');
+  list.innerHTML = '';
+
+  (data.history || []).forEach(item => {
+    let div = document.createElement('div');
+    div.className = 'item';
+
+    let statusClass = item.result === 'win' ? 'win' : item.result === 'lose' ? 'lose' : 'otw';
+
+    let rightText = '';
+
+    if (item.result === 'otw') {
+      rightText = 'OTW';
+    } else {
+      rightText = `${item.result === 'win' ? '+' : '-'} Rp ${item.amount.toLocaleString('id-ID')}`;
+    }
+
+    div.innerHTML = `
+      <div class="match">
+        <span>${item.match}</span>
+        <span class="status ${statusClass}">
+          ${item.result.toUpperCase()} • ${item.host}
+        </span>
+      </div>
+      <span class="${statusClass}">${rightText}</span>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+load();
+</script>
+
+</body>
+</html>
