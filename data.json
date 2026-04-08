@@ -1,5 +1,5 @@
 {
-  "plus": 120000,
+  "plus": 220000,
   "minus": 40000,
   "total": 0,
   "history": [
@@ -7,6 +7,6 @@
     { "match": "kending vs mantzy", "result": "win", "amount": 50000, "host": "Laga aenk" },
     { "match": "fathir vs hesa", "result": "lose", "amount": 10000, "host": "Laga aenk" },
     { "match": "ferry r vs villo", "result": "lose", "amount": 100000, "host": "Laga chouza" },
-    { "match": "lali sopowae penting wes akeh", "result": "win", "amount": 200000 }
+    { "match": "lali sopowae penting wes akeh", "result": "win", "amount": "ws cokkk" }
   ]
 }
