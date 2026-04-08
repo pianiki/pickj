@@ -1,7 +1,7 @@
 {
   "plus": 220000,
   "minus": 40000,
-  "total": 0,
+  "total": 180000,
   "history": [
     { "match": "draka vs davinci", "result": "win", "amount": 90000, "host": "Laga chouza" },
     { "match": "kending vs mantzy", "result": "win", "amount": 50000, "host": "Laga aenk" },
