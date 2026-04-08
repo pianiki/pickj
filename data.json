@@ -3,8 +3,9 @@
   "minus": 40000,
   "total": 0,
   "history": [
-    { "match": "Tim A vs Tim B", "result": "win", "amount": 200000, "host": "Laga aenk" },
-    { "match": "Tim C vs Tim D", "result": "lose", "amount": 150000, "host": "Laga Anto" },
-    { "match": "Tim X vs Tim Y", "result": "otw", "host": "Laga Bopeng" }
+    { "match": "kending vs mantzy", "result": "otw", "amount": , "host": "Laga aenk" },
+    { "match": "fathir vs hesa", "result": "lose", "amount": 10000, "host": "Laga aenk" },
+    { "match": "ferry r vs villo", "result": "lose", "amount": 100000, "host": "Laga chouza" },
+    { "match": "lali sopowae penting wes akeh", "result": "ws", "amount": 200000 }
   ]
 }
