@@ -3,6 +3,7 @@
   "minus": 40000,
   "total": 200000,
   "history": [
+    { "match": "riyos kacung vs kelvin", "result": "lose", "amount": 20000, "host": "Laga cili" },
     { "match": "miku vs kink davinci", "result": "win", "amount": 40000, "host": "Laga milky" },
     { "match": "draka vs davinci", "result": "win", "amount": 90000, "host": "Laga chouza" },
     { "match": "kending vs mantzy", "result": "win", "amount": 50000, "host": "Laga aenk" },
